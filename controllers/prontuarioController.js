@@ -16,10 +16,10 @@ class ProntuarioController {
               id_cliente,
               nome
             )
-          ),
+          ), // <--- VIRGULA MANTIDA AQUI, É O SEPARADOR PARA O PRÓXIMO RELACIONAMENTO
           veterinarios:id_veterinario ( // Relacionamento com veterinarios
-            id,      
-            nome    
+            id,       
+            nome      
           )
         `) // Fechamento da template string
         .order('data_atendimento', { ascending: false });
@@ -55,11 +55,11 @@ class ProntuarioController {
               id_cliente,
               nome
             )
-          ),
+          ), // <--- VIRGULA MANTIDA AQUI
           veterinarios:id_veterinario ( // Relacionamento com veterinarios
-            id,       
+            id,        
             nome      
-          ),
+          ), // <--- VIRGULA MANTIDA AQUI
           prescricoes(*), // Carrega todas as prescrições relacionadas
           vacinas(*),     // Carrega todas as vacinas relacionadas
           anexos_prontuario(*) // Carrega todos os anexos relacionados
@@ -97,7 +97,7 @@ class ProntuarioController {
         diagnostico,
         procedimentos_realizados,
         observacoes,
-        data_atendimento: data_atendimento || new Date().toISOString() // Usa a data fornecida ou gera automaticamente
+        data_atendimento: data_atendimento || new Date().toISOString()
       };
 
       const { data, error } = await supabase
@@ -109,6 +109,10 @@ class ProntuarioController {
             id_animal,
             nome,
             especie
+          ),
+          clientes:id_cliente ( // Adicionei a relação cliente aqui, se precisar no retorno
+            id_cliente,
+            nome
           ),
           veterinarios:id_veterinario ( 
             id,      
@@ -142,8 +146,8 @@ class ProntuarioController {
         diagnostico,
         procedimentos_realizados,
         observacoes,
-        data_atendimento, // Permite atualizar a data
-        data_atualizacao: new Date().toISOString() // Adicionado para rastrear atualização
+        data_atendimento,
+        data_atualizacao: new Date().toISOString()
       };
 
       const { data, error } = await supabase
@@ -156,6 +160,10 @@ class ProntuarioController {
             id_animal,
             nome,
             especie
+          ),
+          clientes:id_cliente ( // Adicionei a relação cliente aqui, se precisar no retorno
+            id_cliente,
+            nome
           ),
           veterinarios:id_veterinario ( 
             id,      
