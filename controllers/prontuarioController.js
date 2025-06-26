@@ -6,7 +6,7 @@ class ProntuarioController {
     try {
       const { data, error } = await supabase
         .from('prontuarios')
-        .select(`
+        .select(` // Abertura da template string
           *,
           animais:id_animal (
             id_animal,
@@ -17,10 +17,11 @@ class ProntuarioController {
               nome
             )
           ),
-veterinarios : id_veterinario ( 
-            id,       
-            nome     
+          veterinarios:id_veterinario ( 
+            id,      
+            nome    
           )
+        `) // Fechamento da template string - CORRIGIDO AQUI!
         .order('data_atendimento', { ascending: false });
 
       if (error) {
@@ -44,7 +45,7 @@ veterinarios : id_veterinario (
       
       const { data, error } = await supabase
         .from('prontuarios')
-        .select(`
+        .select(` // Abertura da template string
           *,
           animais:id_animal (
             id_animal,
@@ -55,17 +56,15 @@ veterinarios : id_veterinario (
               nome
             )
           ),
-          usuarios:id_veterinario (
-            id_usuario,
-            nome,
-            perfil
+          veterinarios:id_veterinario ( // Alias corrigido de 'usuarios' para 'veterinarios'
+            id,       // Coluna 'id' da tabela 'veterinarios'
+            nome      // Coluna 'nome' da tabela 'veterinarios'
+            // Removidas id_usuario e perfil, pois não existem em 'veterinarios'
           ),
           prescricoes(*),
           vacinas(*),
           anexos_prontuario(*)
-        `)
-        .eq('id_prontuario', id)
-        .single();
+        `); // Fechamento da template string
 
       if (error) {
         return res.status(404).json({ erro: 'Prontuário não encontrado' });
@@ -112,17 +111,18 @@ veterinarios : id_veterinario (
       const { data, error } = await supabase
         .from('prontuarios')
         .insert([dadosProntuario])
-        .select(`
+        .select(` // Abertura da template string
           *,
           animais:id_animal (
             id_animal,
             nome,
             especie
           ),
-veterinarios : id_veterinario ( 
-            id,       
-            nome     
-          );
+          veterinarios:id_veterinario ( 
+            id,      
+            nome    
+          )
+        `); // Fechamento da template string - CORRIGIDO AQUI!
 
       if (error) {
         return res.status(400).json({ erro: error.message });
@@ -162,17 +162,18 @@ veterinarios : id_veterinario (
         .from('prontuarios')
         .update(dadosAtualizacao)
         .eq('id_prontuario', id)
-        .select(`
+        .select(` // Abertura da template string
           *,
           animais:id_animal (
             id_animal,
             nome,
             especie
           ),
-veterinarios : id_veterinario ( 
-            id,       
-            nome     
-          );
+          veterinarios:id_veterinario ( 
+            id,      
+            nome    
+          )
+        `); // Fechamento da template string - CORRIGIDO AQUI!
 
       if (error) {
         return res.status(400).json({ erro: error.message });

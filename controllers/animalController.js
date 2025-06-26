@@ -192,13 +192,14 @@ class AnimalController {
 
       const { data, error } = await supabase
         .from('prontuarios')
-        .select(`
+        .select(` // Abertura da template string
           *,
-veterinarios : id_veterinario ( 
-            id,       
-            nome     
+          veterinarios:id_veterinario ( 
+            id,      
+            nome    
           )
-        .eq('id_animal', id)
+        `) // <-- CRASO DE FECHAMENTO ADICIONADA AQUI!
+        .eq('id_animal', id) // Agora este método está fora da template string
         .order('data_atendimento', { ascending: false });
 
       if (error) {
