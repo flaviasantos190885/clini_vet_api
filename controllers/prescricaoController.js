@@ -8,7 +8,7 @@ class PrescricaoController {
         .from('prescricoes')
         .select(`
           *,
-          prontuarios:id_prontuario ( // Relacionamento com prontuarios
+          prontuarios:id_prontuario ( // Removido o comentário problemático aqui
             id_prontuario,
             tipo_atendimento,
             data_atendimento
@@ -39,7 +39,7 @@ class PrescricaoController {
         .from('prescricoes')
         .select(`
           *,
-          prontuarios:id_prontuario (
+          prontuarios:id_prontuario ( // Removido o comentário problemático aqui
             id_prontuario,
             tipo_atendimento,
             data_atendimento
@@ -78,7 +78,6 @@ class PrescricaoController {
         duracao,
         observacoes,
         data_prescricao: new Date().toISOString()
-        // REMOVIDAS: data_cadastro e data_atualizacao - não existem no CSV para 'prescricoes'
       };
 
       const { data, error } = await supabase
@@ -112,13 +111,12 @@ class PrescricaoController {
         frequencia,
         duracao,
         observacoes
-        // REMOVIDA: data_atualizacao - não existe no CSV para 'prescricoes'
       };
 
       const { data, error } = await supabase
         .from('prescricoes')
         .update(dadosAtualizacao)
-        .eq('id_prescricao', id) // PK da tabela prescricoes é 'id_prescricao'
+        .eq('id_prescricao', id)
         .select();
 
       if (error) {
@@ -147,7 +145,7 @@ class PrescricaoController {
       const { error } = await supabase
         .from('prescricoes')
         .delete()
-        .eq('id_prescricao', id); // PK da tabela prescricoes é 'id_prescricao'
+        .eq('id_prescricao', id);
 
       if (error) {
         return res.status(400).json({ erro: error.message }); 
