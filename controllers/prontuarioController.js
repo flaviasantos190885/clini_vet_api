@@ -1,7 +1,7 @@
 const supabase = require('../config/supabase');
 
 class ProntuarioController {
-  // Listar todos os prontuários
+
   async listar(req, res) {
     try {
       const { data, error } = await supabase
@@ -38,7 +38,7 @@ class ProntuarioController {
     }
   }
 
-  // Buscar prontuário por ID
+
   async buscarPorId(req, res) {
     try {
       const { id } = req.params;
@@ -80,7 +80,7 @@ class ProntuarioController {
     }
   }
 
-  // Criar novo prontuário
+
   async criar(req, res) {
     try {
       const {
@@ -143,7 +143,7 @@ class ProntuarioController {
     }
   }
 
-  // Atualizar prontuário
+
   async atualizar(req, res) {
     try {
       const { id } = req.params;
@@ -205,7 +205,7 @@ class ProntuarioController {
     }
   }
 
-  // Excluir prontuário
+
   async excluir(req, res) {
     try {
       const { id } = req.params;
