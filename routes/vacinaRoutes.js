@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const VacinaController = require('../controllers/VacinaController');
+const VacinaController = require('../controllers/vacinaController');
 
 router.get('/', VacinaController.listar);
 router.get('/:id', VacinaController.buscarPorId);

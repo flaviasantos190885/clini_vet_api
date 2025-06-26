@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const VeterinarioController = require('../controllers/VeterinarioController');
+const VeterinarioController = require('../controllers/veterinarioController');
 
 router.get('/', VeterinarioController.listar);
 router.get('/:id', VeterinarioController.buscarPorId);

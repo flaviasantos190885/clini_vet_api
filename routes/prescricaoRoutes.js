@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const PrescricaoController = require('../controllers/PrescricaoController');
+const PrescricaoController = require('../controllers/prescricaoController');
 
 router.get('/', PrescricaoController.listar);
 router.get('/:id', PrescricaoController.buscarPorId);

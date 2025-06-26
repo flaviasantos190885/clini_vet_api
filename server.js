@@ -4,6 +4,13 @@ const veterinarioRoutes = require('./routes/veterinarioRoutes');
 const usuarioRoutes = require('./routes/usuarioRoutes');
 const vacinaRoutes = require('./routes/vacinaRoutes');
 const prescricaoRoutes = require('./routes/prescricaoRoutes');
+const faturaRoutes = require('./routes/faturaRoutes');
+const itemFaturaRoutes = require('./routes/itemFaturaRoutes');
+const pagamentoRoutes = require('./routes/pagamentoRoutes');
+const atendimentoFaturaRoutes = require('./routes/atendimentoFaturaRoutes');
+const loteProdutoRoutes = require('./routes/loteProdutoRoutes');
+const movimentacaoEstoqueRoutes = require('./routes/movimentacaoEstoqueRoutes');
+const anexoProntuarioRoutes = require('./routes/anexoProntuarioRoutes');
 
 const express = require('express');
 const cors = require('cors');
@@ -31,6 +38,14 @@ app.use('/api/veterinarios', veterinarioRoutes);
 app.use('/api/usuarios', usuarioRoutes);
 app.use('/api/vacinas', vacinaRoutes);
 app.use('/api/prescricoes', prescricaoRoutes);
+app.use('/api/faturas', faturaRoutes);
+app.use('/api/itens-fatura', itemFaturaRoutes);
+app.use('/api/pagamentos', pagamentoRoutes);
+app.use('/api/atendimento-fatura', atendimentoFaturaRoutes);
+app.use('/api/lotes-produto', loteProdutoRoutes);
+app.use('/api/movimentacao-estoque', movimentacaoEstoqueRoutes);
+app.use('/api/anexos-prontuario', anexoProntuarioRoutes);
+
 
 // Rota raiz
 app.get('/', (req, res) => {
