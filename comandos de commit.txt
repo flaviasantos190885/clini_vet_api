@@ -1,0 +1,3 @@
+git add .
+git commit -m "Fix: Corrected syntax and veterinario select in ProntuarioController"
+git push -u origin main
