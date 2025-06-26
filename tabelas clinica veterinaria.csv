@@ -1,0 +1,120 @@
+table_name,column_name,data_type,is_primary_key,is_foreign_key
+agendamentos,id_agendamento,bigint,YES,NO
+agendamentos,id_animal,bigint,NO,YES
+agendamentos,id_cliente,bigint,NO,YES
+agendamentos,id_veterinario,bigint,NO,YES
+agendamentos,data_hora_inicio,timestamp with time zone,NO,NO
+agendamentos,data_hora_fim,timestamp with time zone,NO,NO
+agendamentos,tipo_agendamento,character varying,NO,NO
+agendamentos,status_agendamento,character varying,NO,NO
+agendamentos,observacoes,text,NO,NO
+agendamentos,data_cadastro,timestamp with time zone,NO,NO
+agendamentos,data_atualizacao,timestamp with time zone,NO,NO
+anexos_prontuario,id_anexo,bigint,YES,NO
+anexos_prontuario,id_prontuario,bigint,NO,YES
+anexos_prontuario,nome_arquivo,character varying,NO,NO
+anexos_prontuario,caminho_arquivo,character varying,NO,NO
+anexos_prontuario,tipo_arquivo,character varying,NO,NO
+anexos_prontuario,data_upload,timestamp with time zone,NO,NO
+animais,id_animal,bigint,YES,NO
+animais,id_cliente,bigint,NO,YES
+animais,nome,character varying,NO,NO
+animais,especie,character varying,NO,NO
+animais,raca,character varying,NO,NO
+animais,data_nascimento,date,NO,NO
+animais,sexo,character,NO,NO
+animais,peso,numeric,NO,NO
+animais,observacoes,text,NO,NO
+animais,data_cadastro,timestamp with time zone,NO,NO
+animais,data_atualizacao,timestamp with time zone,NO,NO
+atendimento_fatura,id_atendimento_fatura,bigint,YES,NO
+atendimento_fatura,id_prontuario,bigint,NO,YES
+atendimento_fatura,id_fatura,bigint,NO,YES
+clientes,id_cliente,bigint,YES,NO
+clientes,nome,character varying,NO,NO
+clientes,cpf,character varying,NO,NO
+clientes,telefone,character varying,NO,NO
+clientes,email,character varying,NO,NO
+clientes,endereco,character varying,NO,NO
+clientes,data_cadastro,timestamp with time zone,NO,NO
+clientes,data_atualizacao,timestamp with time zone,NO,NO
+clientes,ativo,boolean,NO,NO
+faturas,id_fatura,bigint,YES,NO
+faturas,id_atendimento,bigint,NO,NO
+faturas,id_cliente,bigint,NO,YES
+faturas,data_emissao,timestamp with time zone,NO,NO
+faturas,data_vencimento,date,NO,NO
+faturas,valor_total,numeric,NO,NO
+faturas,status_fatura,character varying,NO,NO
+faturas,observacoes,text,NO,NO
+itens_fatura,id_item_fatura,bigint,YES,NO
+itens_fatura,id_fatura,bigint,NO,YES
+itens_fatura,id_produto,bigint,NO,YES
+itens_fatura,descricao_servico,character varying,NO,NO
+itens_fatura,quantidade,integer,NO,NO
+itens_fatura,valor_unitario,numeric,NO,NO
+itens_fatura,valor_total_item,numeric,NO,NO
+lotes_produto,id_lote,bigint,YES,NO
+lotes_produto,id_produto,bigint,NO,YES
+lotes_produto,numero_lote,character varying,NO,NO
+lotes_produto,data_validade,date,NO,NO
+lotes_produto,quantidade_inicial,integer,NO,NO
+lotes_produto,quantidade_disponivel,integer,NO,NO
+lotes_produto,data_entrada,timestamp with time zone,NO,NO
+movimentacao_estoque,id_movimentacao,bigint,YES,NO
+movimentacao_estoque,id_produto,bigint,NO,YES
+movimentacao_estoque,id_lote,bigint,NO,YES
+movimentacao_estoque,tipo_movimentacao,character varying,NO,NO
+movimentacao_estoque,quantidade,integer,NO,NO
+movimentacao_estoque,data_movimentacao,timestamp with time zone,NO,NO
+movimentacao_estoque,id_usuario_responsavel,bigint,NO,YES
+movimentacao_estoque,observacoes,text,NO,NO
+pagamentos,id_pagamento,bigint,YES,NO
+pagamentos,id_fatura,bigint,NO,YES
+pagamentos,data_pagamento,timestamp with time zone,NO,NO
+pagamentos,valor_pago,numeric,NO,NO
+pagamentos,forma_pagamento,character varying,NO,NO
+pagamentos,observacoes,text,NO,NO
+prescricoes,id_prescricao,bigint,YES,NO
+prescricoes,id_prontuario,bigint,NO,YES
+prescricoes,medicamento,character varying,NO,NO
+prescricoes,dosagem,character varying,NO,NO
+prescricoes,frequencia,character varying,NO,NO
+prescricoes,duracao,character varying,NO,NO
+prescricoes,observacoes,text,NO,NO
+prescricoes,data_prescricao,timestamp with time zone,NO,NO
+produtos,id_produto,bigint,YES,NO
+produtos,nome,character varying,NO,NO
+produtos,descricao,text,NO,NO
+produtos,preco_venda,numeric,NO,NO
+produtos,unidade_medida,character varying,NO,NO
+produtos,estoque_atual,integer,NO,NO
+produtos,estoque_minimo,integer,NO,NO
+produtos,data_cadastro,timestamp with time zone,NO,NO
+produtos,data_atualizacao,timestamp with time zone,NO,NO
+produtos,ativo,boolean,NO,NO
+prontuarios,id_prontuario,bigint,YES,NO
+prontuarios,id_animal,bigint,NO,YES
+prontuarios,data_atendimento,timestamp with time zone,NO,NO
+prontuarios,id_veterinario,bigint,NO,YES
+prontuarios,tipo_atendimento,character varying,NO,NO
+prontuarios,anamnese,text,NO,NO
+prontuarios,diagnostico,text,NO,NO
+prontuarios,procedimentos_realizados,text,NO,NO
+prontuarios,observacoes,text,NO,NO
+usuarios,id_usuario,bigint,YES,NO
+usuarios,nome,character varying,NO,NO
+usuarios,email,character varying,NO,NO
+usuarios,senha_hash,character varying,NO,NO
+usuarios,perfil,character varying,NO,NO
+usuarios,ativo,boolean,NO,NO
+usuarios,data_cadastro,timestamp with time zone,NO,NO
+usuarios,data_atualizacao,timestamp with time zone,NO,NO
+vacinas,id_vacina,bigint,YES,NO
+vacinas,id_prontuario,bigint,NO,YES
+vacinas,nome_vacina,character varying,NO,NO
+vacinas,data_aplicacao,date,NO,NO
+vacinas,data_proxima_dose,date,NO,NO
+vacinas,lote,character varying,NO,NO
+veterinarios,id,bigint,YES,NO
+veterinarios,nome,character varying,NO,NO

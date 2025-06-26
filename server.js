@@ -1,4 +1,10 @@
 require('dotenv').config();
+
+const veterinarioRoutes = require('./routes/veterinarioRoutes');
+const usuarioRoutes = require('./routes/usuarioRoutes');
+const vacinaRoutes = require('./routes/vacinaRoutes');
+const prescricaoRoutes = require('./routes/prescricaoRoutes');
+
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
@@ -21,6 +27,10 @@ app.use(express.urlencoded({ extended: true }));
 
 // Rotas da API
 app.use('/api', routes);
+app.use('/api/veterinarios', veterinarioRoutes);
+app.use('/api/usuarios', usuarioRoutes);
+app.use('/api/vacinas', vacinaRoutes);
+app.use('/api/prescricoes', prescricaoRoutes);
 
 // Rota raiz
 app.get('/', (req, res) => {
