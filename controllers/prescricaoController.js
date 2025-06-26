@@ -77,9 +77,8 @@ class PrescricaoController {
         frequencia,
         duracao,
         observacoes,
-        data_prescricao: new Date().toISOString(),
-        data_cadastro: new Date().toISOString(), // Adicionado para consistência
-        data_atualizacao: new Date().toISOString() // Adicionado para consistência
+        data_prescricao: new Date().toISOString()
+        // REMOVIDAS: data_cadastro e data_atualizacao - não existem no CSV para 'prescricoes'
       };
 
       const { data, error } = await supabase
@@ -112,8 +111,8 @@ class PrescricaoController {
         dosagem,
         frequencia,
         duracao,
-        observacoes,
-        data_atualizacao: new Date().toISOString()
+        observacoes
+        // REMOVIDA: data_atualizacao - não existe no CSV para 'prescricoes'
       };
 
       const { data, error } = await supabase

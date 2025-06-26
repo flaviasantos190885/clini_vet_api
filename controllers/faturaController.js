@@ -35,7 +35,7 @@ class FaturaController {
   async buscarPorId(req, res) {
     try {
       const { id } = req.params;
-
+      
       const { data, error } = await supabase
         .from('faturas')
         .select(`
@@ -67,7 +67,7 @@ class FaturaController {
   async criar(req, res) {
     try {
       const { 
-        id_atendimento, // Não é FK no CSV, apenas uma coluna
+        id_atendimento, 
         id_cliente, 
         data_vencimento, 
         valor_total, 
@@ -80,13 +80,14 @@ class FaturaController {
       }
 
       const dadosFatura = {
-        id_atendimento: id_atendimento || null, // Permite ser nulo se não fornecido
+        id_atendimento: id_atendimento || null, 
         id_cliente,
-        data_emissao: new Date().toISOString(), // Gerado automaticamente
+        data_emissao: new Date().toISOString(), 
         data_vencimento,
         valor_total,
-        status_fatura: status_fatura || 'Pendente', // Valor padrão
+        status_fatura: status_fatura || 'Pendente', 
         observacoes,
+        // REMOVIDA: data_atualizacao - não existe no CSV para 'faturas'
       };
 
       const { data, error } = await supabase
@@ -113,8 +114,8 @@ class FaturaController {
     try {
       const { id } = req.params;
       const { 
-        id_atendimento, // Não é FK no CSV, apenas uma coluna
-        id_cliente, // Pode não ser atualizável, dependendo da regra de negócio
+        id_atendimento, 
+        id_cliente, 
         data_vencimento, 
         valor_total, 
         status_fatura, 
@@ -123,12 +124,12 @@ class FaturaController {
 
       const dadosAtualizacao = {
         id_atendimento,
-        id_cliente, // Cuidado ao permitir atualização de FKs
+        id_cliente, 
         data_vencimento,
         valor_total,
         status_fatura,
         observacoes,
-        data_atualizacao: new Date().toISOString()
+        // REMOVIDA: data_atualizacao - não existe no CSV para 'faturas'
       };
 
       const { data, error } = await supabase

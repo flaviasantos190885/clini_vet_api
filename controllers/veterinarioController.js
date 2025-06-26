@@ -50,16 +50,17 @@ class VeterinarioController {
   // Criar novo veterinário
   async criar(req, res) {
     try {
-      const { nome } = req.body; // Apenas 'nome' conforme seu CSV
+      // APENAS 'nome' conforme seu CSV. Removidas data_cadastro e data_atualizacao.
+      const { nome } = req.body; 
 
       if (!nome) {
         return res.status(400).json({ erro: 'Nome do veterinário é obrigatório' });
       }
 
       const dadosVeterinario = {
-        nome,
-        data_cadastro: new Date().toISOString(),
-        data_atualizacao: new Date().toISOString()
+        nome
+        // As colunas data_cadastro e data_atualizacao NÃO existem no schema do CSV para 'veterinarios',
+        // então não devem ser incluídas aqui.
       };
 
       const { data, error } = await supabase
@@ -85,11 +86,13 @@ class VeterinarioController {
   async atualizar(req, res) {
     try {
       const { id } = req.params;
-      const { nome } = req.body; // Apenas 'nome' conforme seu CSV
+      // APENAS 'nome' conforme seu CSV. Removida data_atualizacao.
+      const { nome } = req.body; 
 
       const dadosAtualizacao = {
-        nome,
-        data_atualizacao: new Date().toISOString()
+        nome
+        // A coluna data_atualizacao NÃO existe no schema do CSV para 'veterinarios',
+        // então não deve ser incluída aqui.
       };
 
       const { data, error } = await supabase
@@ -127,7 +130,8 @@ class VeterinarioController {
         .eq('id', id);
 
       if (error) {
-        // Se houver agendamentos ou prontuários vinculados e a FK for RESTRICT/NO ACTION
+        // Se houver agendamentos ou prontuários vinculados e a FK for RESTRICT/NO ACTION,
+        // o banco de dados retornará um erro de violação de chave estrangeira aqui.
         return res.status(400).json({ erro: error.message }); 
       }
 

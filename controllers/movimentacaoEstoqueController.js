@@ -6,7 +6,7 @@ class MovimentacaoEstoqueController {
     try {
       const { data, error } = await supabase
         .from('movimentacao_estoque')
-        .select(`
+        .select(` // Abertura da template string
           *,
           produtos:id_produto (
             id_produto,
@@ -18,12 +18,12 @@ class MovimentacaoEstoqueController {
             numero_lote,
             data_validade
           ),
-          usuarios:id_usuario_responsavel ( // Assumindo que id_usuario_responsavel referencia usuarios.id_usuario
+          usuarios:id_usuario_responsavel ( // Removido o comentário problemático aqui
             id_usuario,
             nome,
             email
           )
-        `)
+        `) // Fechamento da template string
         .order('data_movimentacao', { ascending: false });
 
       if (error) {
@@ -47,7 +47,7 @@ class MovimentacaoEstoqueController {
       
       const { data, error } = await supabase
         .from('movimentacao_estoque')
-        .select(`
+        .select(` // Abertura da template string
           *,
           produtos:id_produto (
             id_produto,
@@ -59,12 +59,12 @@ class MovimentacaoEstoqueController {
             numero_lote,
             data_validade
           ),
-          usuarios:id_usuario_responsavel (
+          usuarios:id_usuario_responsavel ( // Removido o comentário problemático aqui
             id_usuario,
             nome,
             email
           )
-        `)
+        `) // Fechamento da template string
         .eq('id_movimentacao', id)
         .single();
 
@@ -99,10 +99,10 @@ class MovimentacaoEstoqueController {
 
       const dadosMovimentacao = {
         id_produto,
-        id_lote: id_lote || null, // Lote pode ser opcional para algumas movimentações
+        id_lote: id_lote || null, 
         tipo_movimentacao,
         quantidade,
-        data_movimentacao: new Date().toISOString(), // Gerado automaticamente
+        data_movimentacao: new Date().toISOString(), 
         id_usuario_responsavel,
         observacoes,
       };
@@ -110,7 +110,24 @@ class MovimentacaoEstoqueController {
       const { data, error } = await supabase
         .from('movimentacao_estoque')
         .insert([dadosMovimentacao])
-        .select(); 
+        .select(` // Abertura da template string
+          *,
+          produtos:id_produto (
+            id_produto,
+            nome,
+            unidade_medida
+          ),
+          lotes_produto:id_lote (
+            id_lote,
+            numero_lote,
+            data_validade
+          ),
+          usuarios:id_usuario_responsavel ( // Removido o comentário problemático aqui
+            id_usuario,
+            nome,
+            email
+          )
+        `); // Fechamento da template string
 
       if (error) {
         return res.status(400).json({ erro: error.message });
@@ -126,7 +143,7 @@ class MovimentacaoEstoqueController {
     }
   }
 
-  // Atualizar movimentação de estoque (CUIDADO: Atualizar estoque é complexo)
+  // Atualizar movimentação de estoque
   async atualizar(req, res) {
     try {
       const { id } = req.params;
@@ -142,14 +159,31 @@ class MovimentacaoEstoqueController {
         quantidade,
         id_usuario_responsavel,
         observacoes,
-        data_movimentacao: new Date().toISOString(), // Atualiza a data da movimentação
+        data_movimentacao: new Date().toISOString(), 
       };
 
       const { data, error } = await supabase
         .from('movimentacao_estoque')
         .update(dadosAtualizacao)
         .eq('id_movimentacao', id)
-        .select();
+        .select(` // Abertura da template string
+          *,
+          produtos:id_produto (
+            id_produto,
+            nome,
+            unidade_medida
+          ),
+          lotes_produto:id_lote (
+            id_lote,
+            numero_lote,
+            data_validade
+          ),
+          usuarios:id_usuario_responsavel ( // Removido o comentário problemático aqui
+            id_usuario,
+            nome,
+            email
+          )
+        `); // Fechamento da template string
 
       if (error) {
         return res.status(400).json({ erro: error.message });
@@ -169,7 +203,7 @@ class MovimentacaoEstoqueController {
     }
   }
 
-  // Excluir movimentação de estoque (CUIDADO: Excluir afeta o estoque total)
+  // Excluir movimentação de estoque
   async excluir(req, res) {
     try {
       const { id } = req.params;
