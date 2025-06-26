@@ -17,12 +17,10 @@ class ProntuarioController {
               nome
             )
           ),
-          usuarios:id_veterinario (
-            id_usuario,
-            nome,
-            perfil
+veterinarios : id_veterinario ( 
+            id,       
+            nome     
           )
-        `)
         .order('data_atendimento', { ascending: false });
 
       if (error) {
@@ -121,12 +119,10 @@ class ProntuarioController {
             nome,
             especie
           ),
-          usuarios:id_veterinario (
-            id_usuario,
-            nome,
-            perfil
-          )
-        `);
+veterinarios : id_veterinario ( 
+            id,       
+            nome     
+          );
 
       if (error) {
         return res.status(400).json({ erro: error.message });
@@ -173,12 +169,10 @@ class ProntuarioController {
             nome,
             especie
           ),
-          usuarios:id_veterinario (
-            id_usuario,
-            nome,
-            perfil
-          )
-        `);
+veterinarios : id_veterinario ( 
+            id,       
+            nome     
+          );
 
       if (error) {
         return res.status(400).json({ erro: error.message });

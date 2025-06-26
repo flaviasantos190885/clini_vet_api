@@ -194,12 +194,10 @@ class AnimalController {
         .from('prontuarios')
         .select(`
           *,
-          usuarios:id_veterinario (
-            id_usuario,
-            nome,
-            perfil
+veterinarios : id_veterinario ( 
+            id,       
+            nome     
           )
-        `)
         .eq('id_animal', id)
         .order('data_atendimento', { ascending: false });
 

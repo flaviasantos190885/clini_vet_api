@@ -1,0 +1,646 @@
+{
+  "info": {
+    "name": "Veterinary Clinic API - Bem Estar Animal",
+    "description": "API completa para gerenciamento de clínica veterinária com Supabase\n\nFuncionalidades:\n- Gestão de clientes\n- Cadastro de animais\n- Prontuários médicos\n- Agendamentos\n- Controle de produtos/estoque\n\nBase URL: {{base_url}}\nVersão: 1.0.0",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_postman_id": "veterinary-clinic-api-2024",
+    "version": {
+      "major": 1,
+      "minor": 0,
+      "patch": 0
+    }
+  },
+  "item": [
+    {
+      "name": "🏠 Status & Info",
+      "item": [
+        {
+          "name": "API Status",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/status",
+              "host": ["{{base_url}}"],
+              "path": ["api", "status"]
+            },
+            "description": "Verifica o status da API e informações gerais"
+          },
+          "response": []
+        },
+        {
+          "name": "API Root",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/",
+              "host": ["{{base_url}}"]
+            },
+            "description": "Página inicial da API com documentação básica"
+          },
+          "response": []
+        }
+      ],
+      "description": "Endpoints para verificar status e informações da API"
+    },
+    {
+      "name": "👥 Clientes",
+      "item": [
+        {
+          "name": "Listar Clientes",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/clientes",
+              "host": ["{{base_url}}"],
+              "path": ["api", "clientes"]
+            },
+            "description": "Lista todos os clientes ativos"
+          },
+          "response": []
+        },
+        {
+          "name": "Buscar Cliente por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/clientes/{{cliente_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "clientes", "{{cliente_id}}"]
+            },
+            "description": "Busca um cliente específico pelo ID"
+          },
+          "response": []
+        },
+        {
+          "name": "Criar Cliente",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"João Silva\",\n  \"cpf\": \"123.456.789-00\",\n  \"telefone\": \"(11) 99999-9999\",\n  \"email\": \"joao.silva@email.com\",\n  \"endereco\": \"Rua das Flores, 123 - São Paulo, SP\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/clientes",
+              "host": ["{{base_url}}"],
+              "path": ["api", "clientes"]
+            },
+            "description": "Cria um novo cliente"
+          },
+          "response": []
+        },
+        {
+          "name": "Atualizar Cliente",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"João Silva Santos\",\n  \"telefone\": \"(11) 88888-8888\",\n  \"email\": \"joao.santos@email.com\",\n  \"endereco\": \"Rua das Rosas, 456 - São Paulo, SP\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/clientes/{{cliente_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "clientes", "{{cliente_id}}"]
+            },
+            "description": "Atualiza os dados de um cliente"
+          },
+          "response": []
+        },
+        {
+          "name": "Excluir Cliente",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/clientes/{{cliente_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "clientes", "{{cliente_id}}"]
+            },
+            "description": "Exclui um cliente (soft delete)"
+          },
+          "response": []
+        },
+        {
+          "name": "Listar Animais do Cliente",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/clientes/{{cliente_id}}/animais",
+              "host": ["{{base_url}}"],
+              "path": ["api", "clientes", "{{cliente_id}}", "animais"]
+            },
+            "description": "Lista todos os animais de um cliente específico"
+          },
+          "response": []
+        }
+      ],
+      "description": "Operações CRUD para gerenciamento de clientes"
+    },
+    {
+      "name": "🐕 Animais",
+      "item": [
+        {
+          "name": "Listar Animais",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/animais",
+              "host": ["{{base_url}}"],
+              "path": ["api", "animais"]
+            },
+            "description": "Lista todos os animais cadastrados"
+          },
+          "response": []
+        },
+        {
+          "name": "Buscar Animal por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/animais/{{animal_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "animais", "{{animal_id}}"]
+            },
+            "description": "Busca um animal específico pelo ID"
+          },
+          "response": []
+        },
+        {
+          "name": "Criar Animal",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_cliente\": 1,\n  \"nome\": \"Rex\",\n  \"especie\": \"Cão\",\n  \"raca\": \"Golden Retriever\",\n  \"data_nascimento\": \"2020-05-15\",\n  \"sexo\": \"M\",\n  \"peso\": 25.5,\n  \"observacoes\": \"Animal dócil e bem socializado\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/animais",
+              "host": ["{{base_url}}"],
+              "path": ["api", "animais"]
+            },
+            "description": "Cadastra um novo animal"
+          },
+          "response": []
+        },
+        {
+          "name": "Atualizar Animal",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Rex Jr\",\n  \"especie\": \"Cão\",\n  \"raca\": \"Golden Retriever\",\n  \"data_nascimento\": \"2020-05-15\",\n  \"sexo\": \"M\",\n  \"peso\": 28.0,\n  \"observacoes\": \"Animal dócil, bem socializado. Ganhou peso.\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/animais/{{animal_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "animais", "{{animal_id}}"]
+            },
+            "description": "Atualiza os dados de um animal"
+          },
+          "response": []
+        },
+        {
+          "name": "Excluir Animal",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/animais/{{animal_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "animais", "{{animal_id}}"]
+            },
+            "description": "Exclui um animal"
+          },
+          "response": []
+        },
+        {
+          "name": "Listar Prontuários do Animal",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/animais/{{animal_id}}/prontuarios",
+              "host": ["{{base_url}}"],
+              "path": ["api", "animais", "{{animal_id}}", "prontuarios"]
+            },
+            "description": "Lista todos os prontuários de um animal específico"
+          },
+          "response": []
+        }
+      ],
+      "description": "Operações CRUD para gerenciamento de animais"
+    },
+    {
+      "name": "📋 Prontuários",
+      "item": [
+        {
+          "name": "Listar Prontuários",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/prontuarios",
+              "host": ["{{base_url}}"],
+              "path": ["api", "prontuarios"]
+            },
+            "description": "Lista todos os prontuários médicos"
+          },
+          "response": []
+        },
+        {
+          "name": "Buscar Prontuário por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/prontuarios/{{prontuario_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "prontuarios", "{{prontuario_id}}"]
+            },
+            "description": "Busca um prontuário específico com detalhes completos"
+          },
+          "response": []
+        },
+        {
+          "name": "Criar Prontuário",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_animal\": 1,\n  \"id_veterinario\": 1,\n  \"tipo_atendimento\": \"Consulta\",\n  \"anamnese\": \"Animal apresentou sintomas de letargia e perda de apetite há 3 dias\",\n  \"diagnostico\": \"Gastroenterite leve\",\n  \"procedimentos_realizados\": \"Exame clínico geral, palpação abdominal\",\n  \"observacoes\": \"Prescrever dieta leve por 5 dias e retorno em 1 semana\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/prontuarios",
+              "host": ["{{base_url}}"],
+              "path": ["api", "prontuarios"]
+            },
+            "description": "Cria um novo prontuário médico"
+          },
+          "response": []
+        },
+        {
+          "name": "Atualizar Prontuário",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tipo_atendimento\": \"Retorno\",\n  \"anamnese\": \"Animal apresentou melhora significativa dos sintomas\",\n  \"diagnostico\": \"Gastroenterite leve - em recuperação\",\n  \"procedimentos_realizados\": \"Exame clínico de acompanhamento\",\n  \"observacoes\": \"Continuar dieta por mais 2 dias. Alta médica.\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/prontuarios/{{prontuario_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "prontuarios", "{{prontuario_id}}"]
+            },
+            "description": "Atualiza um prontuário médico"
+          },
+          "response": []
+        },
+        {
+          "name": "Excluir Prontuário",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/prontuarios/{{prontuario_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "prontuarios", "{{prontuario_id}}"]
+            },
+            "description": "Exclui um prontuário médico"
+          },
+          "response": []
+        }
+      ],
+      "description": "Operações CRUD para gerenciamento de prontuários médicos"
+    },
+    {
+      "name": "📅 Agendamentos",
+      "item": [
+        {
+          "name": "Listar Agendamentos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/agendamentos",
+              "host": ["{{base_url}}"],
+              "path": ["api", "agendamentos"]
+            },
+            "description": "Lista todos os agendamentos"
+          },
+          "response": []
+        },
+        {
+          "name": "Listar Agendamentos por Data",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/agendamentos/data?data=2024-01-15",
+              "host": ["{{base_url}}"],
+              "path": ["api", "agendamentos", "data"],
+              "query": [
+                {
+                  "key": "data",
+                  "value": "2024-01-15",
+                  "description": "Data no formato YYYY-MM-DD"
+                }
+              ]
+            },
+            "description": "Lista agendamentos de uma data específica"
+          },
+          "response": []
+        },
+        {
+          "name": "Buscar Agendamento por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/agendamentos/{{agendamento_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "agendamentos", "{{agendamento_id}}"]
+            },
+            "description": "Busca um agendamento específico pelo ID"
+          },
+          "response": []
+        },
+        {
+          "name": "Criar Agendamento",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_animal\": 1,\n  \"id_cliente\": 1,\n  \"id_veterinario\": 1,\n  \"data_hora_inicio\": \"2024-01-15T14:00:00\",\n  \"data_hora_fim\": \"2024-01-15T15:00:00\",\n  \"tipo_agendamento\": \"Consulta\",\n  \"observacoes\": \"Consulta de rotina - checkup anual\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/agendamentos",
+              "host": ["{{base_url}}"],
+              "path": ["api", "agendamentos"]
+            },
+            "description": "Cria um novo agendamento"
+          },
+          "response": []
+        },
+        {
+          "name": "Atualizar Agendamento",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data_hora_inicio\": \"2024-01-15T15:00:00\",\n  \"data_hora_fim\": \"2024-01-15T16:00:00\",\n  \"tipo_agendamento\": \"Consulta\",\n  \"status_agendamento\": \"Confirmado\",\n  \"observacoes\": \"Consulta de rotina - checkup anual - horário alterado\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/agendamentos/{{agendamento_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "agendamentos", "{{agendamento_id}}"]
+            },
+            "description": "Atualiza um agendamento"
+          },
+          "response": []
+        },
+        {
+          "name": "Excluir Agendamento",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/agendamentos/{{agendamento_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "agendamentos", "{{agendamento_id}}"]
+            },
+            "description": "Exclui um agendamento"
+          },
+          "response": []
+        }
+      ],
+      "description": "Operações CRUD para gerenciamento de agendamentos"
+    },
+    {
+      "name": "📦 Produtos",
+      "item": [
+        {
+          "name": "Listar Produtos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/produtos",
+              "host": ["{{base_url}}"],
+              "path": ["api", "produtos"]
+            },
+            "description": "Lista todos os produtos ativos"
+          },
+          "response": []
+        },
+        {
+          "name": "Listar Produtos com Estoque Baixo",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/produtos/estoque-baixo",
+              "host": ["{{base_url}}"],
+              "path": ["api", "produtos", "estoque-baixo"]
+            },
+            "description": "Lista produtos com estoque abaixo do mínimo"
+          },
+          "response": []
+        },
+        {
+          "name": "Buscar Produto por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/produtos/{{produto_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "produtos", "{{produto_id}}"]
+            },
+            "description": "Busca um produto específico pelo ID"
+          },
+          "response": []
+        },
+        {
+          "name": "Criar Produto",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Ração Premium Cães Adultos\",\n  \"descricao\": \"Ração super premium para cães adultos de porte médio\",\n  \"preco_venda\": 89.90,\n  \"unidade_medida\": \"kg\",\n  \"estoque_atual\": 50,\n  \"estoque_minimo\": 10\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/produtos",
+              "host": ["{{base_url}}"],
+              "path": ["api", "produtos"]
+            },
+            "description": "Cadastra um novo produto"
+          },
+          "response": []
+        },
+        {
+          "name": "Atualizar Produto",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Ração Premium Cães Adultos 15kg\",\n  \"descricao\": \"Ração super premium para cães adultos de porte médio - embalagem 15kg\",\n  \"preco_venda\": 95.90,\n  \"unidade_medida\": \"kg\",\n  \"estoque_atual\": 45,\n  \"estoque_minimo\": 8\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/produtos/{{produto_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "produtos", "{{produto_id}}"]
+            },
+            "description": "Atualiza um produto"
+          },
+          "response": []
+        },
+        {
+          "name": "Excluir Produto",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/produtos/{{produto_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "produtos", "{{produto_id}}"]
+            },
+            "description": "Exclui um produto (soft delete)"
+          },
+          "response": []
+        }
+      ],
+      "description": "Operações CRUD para gerenciamento de produtos e estoque"
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Script executado antes de cada requisição",
+          "// Você pode adicionar lógica de autenticação aqui se necessário"
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Testes automáticos para todas as requisições",
+          "pm.test(\"Status code is success\", function () {",
+          "    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+          "});",
+          "",
+          "pm.test(\"Response has success field\", function () {",
+          "    const jsonData = pm.response.json();",
+          "    pm.expect(jsonData).to.have.property('sucesso');",
+          "});",
+          "",
+          "pm.test(\"Response time is less than 5000ms\", function () {",
+          "    pm.expect(pm.response.responseTime).to.be.below(5000);",
+          "});"
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:3000",
+      "description": "URL base da API - altere para produção quando necessário"
+    },
+    {
+      "key": "cliente_id",
+      "value": "1",
+      "description": "ID do cliente para testes"
+    },
+    {
+      "key": "animal_id",
+      "value": "1",
+      "description": "ID do animal para testes"
+    },
+    {
+      "key": "prontuario_id",
+      "value": "1",
+      "description": "ID do prontuário para testes"
+    },
+    {
+      "key": "agendamento_id",
+      "value": "1",
+      "description": "ID do agendamento para testes"
+    },
+    {
+      "key": "produto_id",
+      "value": "1",
+      "description": "ID do produto para testes"
+    }
+  ]
+}

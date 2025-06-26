@@ -6,7 +6,7 @@ class AgendamentoController {
     try {
       const { data, error } = await supabase
         .from('agendamentos')
-        .select(`
+        .select(` // Abertura da template string
           *,
           animais:id_animal (
             id_animal,
@@ -18,12 +18,11 @@ class AgendamentoController {
             nome,
             telefone
           ),
-          usuarios:id_veterinario (
-            id_usuario,
-            nome,
-            perfil
+          veterinarios:id_veterinario ( 
+            id,      
+            nome    
           )
-        `)
+        `) // Fechamento da template string
         .order('data_hora_inicio', { ascending: true });
 
       if (error) {
@@ -47,7 +46,7 @@ class AgendamentoController {
       
       const { data, error } = await supabase
         .from('agendamentos')
-        .select(`
+        .select(` // Abertura da template string
           *,
           animais:id_animal (
             id_animal,
@@ -59,12 +58,11 @@ class AgendamentoController {
             nome,
             telefone
           ),
-          usuarios:id_veterinario (
-            id_usuario,
-            nome,
-            perfil
+          veterinarios:id_veterinario ( 
+            id,      
+            nome    
           )
-        `)
+        `) // Fechamento da template string
         .eq('id_agendamento', id)
         .single();
 
@@ -117,7 +115,7 @@ class AgendamentoController {
       const { data, error } = await supabase
         .from('agendamentos')
         .insert([dadosAgendamento])
-        .select(`
+        .select(` // Abertura da template string
           *,
           animais:id_animal (
             id_animal,
@@ -129,12 +127,11 @@ class AgendamentoController {
             nome,
             telefone
           ),
-          usuarios:id_veterinario (
-            id_usuario,
-            nome,
-            perfil
+          veterinarios:id_veterinario ( 
+            id,      
+            nome    
           )
-        `);
+        `); // Fechamento da template string (aqui o ponto e vírgula está no lugar certo, pois é o final do statement)
 
       if (error) {
         return res.status(400).json({ erro: error.message });
@@ -175,7 +172,7 @@ class AgendamentoController {
         .from('agendamentos')
         .update(dadosAtualizacao)
         .eq('id_agendamento', id)
-        .select(`
+        .select(` // Abertura da template string
           *,
           animais:id_animal (
             id_animal,
@@ -187,12 +184,11 @@ class AgendamentoController {
             nome,
             telefone
           ),
-          usuarios:id_veterinario (
-            id_usuario,
-            nome,
-            perfil
+          veterinarios:id_veterinario ( 
+            id,      
+            nome    
           )
-        `);
+        `); // Fechamento da template string (aqui o ponto e vírgula está no lugar certo)
 
       if (error) {
         return res.status(400).json({ erro: error.message });
@@ -246,7 +242,7 @@ class AgendamentoController {
 
       const { data, error } = await supabase
         .from('agendamentos')
-        .select(`
+        .select(` // Abertura da template string
           *,
           animais:id_animal (
             id_animal,
@@ -258,12 +254,11 @@ class AgendamentoController {
             nome,
             telefone
           ),
-          usuarios:id_veterinario (
-            id_usuario,
-            nome,
-            perfil
+          veterinarios:id_veterinario ( 
+            id,      
+            nome    
           )
-        `)
+        `) // Fechamento da template string
         .gte('data_hora_inicio', `${dataParam}T00:00:00`)
         .lt('data_hora_inicio', `${dataParam}T23:59:59`)
         .order('data_hora_inicio', { ascending: true });
