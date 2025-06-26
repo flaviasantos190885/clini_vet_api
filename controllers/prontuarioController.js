@@ -6,22 +6,22 @@ class ProntuarioController {
     try {
       const { data, error } = await supabase
         .from('prontuarios')
-        .select(` // Abertura da template string
+        .select(`
           *,
-          animais:id_animal ( // Relacionamento com animais
+          animais:id_animal (
             id_animal,
             nome,
             especie,
-            clientes:id_cliente ( // Relacionamento aninhado com clientes
+            clientes:id_cliente (
               id_cliente,
               nome
             )
-          ), // <--- VIRGULA MANTIDA AQUI, É O SEPARADOR PARA O PRÓXIMO RELACIONAMENTO
-          veterinarios:id_veterinario ( // Relacionamento com veterinarios
-            id,       
-            nome      
+          ),
+          veterinarios:id_veterinario (
+            id,
+            nome
           )
-        `) // Fechamento da template string
+        `)
         .order('data_atendimento', { ascending: false });
 
       if (error) {
@@ -45,26 +45,26 @@ class ProntuarioController {
       
       const { data, error } = await supabase
         .from('prontuarios')
-        .select(` // Abertura da template string
+        .select(`
           *,
-          animais:id_animal ( // Relacionamento com animais
+          animais:id_animal (
             id_animal,
             nome,
             especie,
-            clientes:id_cliente ( // Relacionamento aninhado com clientes
+            clientes:id_cliente (
               id_cliente,
               nome
             )
-          ), // <--- VIRGULA MANTIDA AQUI
-          veterinarios:id_veterinario ( // Relacionamento com veterinarios
-            id,        
-            nome      
-          ), // <--- VIRGULA MANTIDA AQUI
-          prescricoes(*), // Carrega todas as prescrições relacionadas
-          vacinas(*),     // Carrega todas as vacinas relacionadas
-          anexos_prontuario(*) // Carrega todos os anexos relacionados
-        `) // Fechamento da template string
-        .eq('id_prontuario', id) // PK da tabela prontuarios é 'id_prontuario'
+          ),
+          veterinarios:id_veterinario (
+            id,
+            nome
+          ),
+          prescricoes(*),
+          vacinas(*),
+          anexos_prontuario(*)
+        `)
+        .eq('id_prontuario', id)
         .single();
 
       if (error) {
@@ -83,7 +83,16 @@ class ProntuarioController {
   // Criar novo prontuário
   async criar(req, res) {
     try {
-      const { id_animal, id_veterinario, tipo_atendimento, anamnese, diagnostico, procedimentos_realizados, observacoes, data_atendimento } = req.body; 
+      const {
+        id_animal,
+        id_veterinario,
+        tipo_atendimento,
+        anamnese,
+        diagnostico,
+        procedimentos_realizados,
+        observacoes,
+        data_atendimento
+      } = req.body; 
 
       if (!id_animal || !id_veterinario) {
         return res.status(400).json({ erro: 'ID do animal e veterinário são obrigatórios' });
@@ -103,22 +112,22 @@ class ProntuarioController {
       const { data, error } = await supabase
         .from('prontuarios')
         .insert([dadosProntuario])
-        .select(` // Abertura da template string
+        .select(`
           *,
           animais:id_animal (
             id_animal,
             nome,
-            especie
+            especie,
+            clientes:id_cliente (
+              id_cliente,
+              nome
+            )
           ),
-          clientes:id_cliente ( // Adicionei a relação cliente aqui, se precisar no retorno
-            id_cliente,
+          veterinarios:id_veterinario (
+            id,
             nome
-          ),
-          veterinarios:id_veterinario ( 
-            id,      
-            nome    
           )
-        `); // Fechamento da template string
+        `);
 
       if (error) {
         return res.status(400).json({ erro: error.message });
@@ -138,7 +147,14 @@ class ProntuarioController {
   async atualizar(req, res) {
     try {
       const { id } = req.params;
-      const { tipo_atendimento, anamnese, diagnostico, procedimentos_realizados, observacoes, data_atendimento } = req.body; 
+      const {
+        tipo_atendimento,
+        anamnese,
+        diagnostico,
+        procedimentos_realizados,
+        observacoes,
+        data_atendimento
+      } = req.body; 
 
       const dadosAtualizacao = {
         tipo_atendimento,
@@ -154,28 +170,28 @@ class ProntuarioController {
         .from('prontuarios')
         .update(dadosAtualizacao)
         .eq('id_prontuario', id)
-        .select(` // Abertura da template string
+        .select(`
           *,
           animais:id_animal (
             id_animal,
             nome,
-            especie
+            especie,
+            clientes:id_cliente (
+              id_cliente,
+              nome
+            )
           ),
-          clientes:id_cliente ( // Adicionei a relação cliente aqui, se precisar no retorno
-            id_cliente,
+          veterinarios:id_veterinario (
+            id,
             nome
-          ),
-          veterinarios:id_veterinario ( 
-            id,      
-            nome    
           )
-        `); // Fechamento da template string
+        `);
 
       if (error) {
         return res.status(400).json({ erro: error.message });
       }
 
-      if (data.length === 0) {
+      if (!data || data.length === 0) {
         return res.status(404).json({ erro: 'Prontuário não encontrado' });
       }
 
