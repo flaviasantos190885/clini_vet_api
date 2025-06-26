@@ -59,7 +59,19 @@ app.get('/', (req, res) => {
       prontuarios: '/api/prontuarios',
       agendamentos: '/api/agendamentos',
       produtos: '/api/produtos',
-      status: '/api/status'
+      status: '/api/status',
+      veterinarios: '/api/veterinarios',
+      usuarios: '/api/usuarios',
+      vacinas: '/api/vacinas',
+      prescricoes: '/api/prescricoes',
+      faturas: '/api/faturas',
+      'itens-fatura': '/api/itens-fatura', // Note o uso de aspas por causa do hífen
+      pagamentos: '/api/pagamentos',
+      'atendimento-fatura': '/api/atendimento-fatura', // Aspas pelo hífen
+      'lotes-produto': '/api/lotes-produto',           // Aspas pelo hífen
+      'movimentacao-estoque': '/api/movimentacao-estoque', // Aspas pelo hífen
+      'anexos-prontuario': '/api/anexos-prontuario'     // Aspas pelo hífen
+
     },
     timestamp: new Date().toISOString()
   });
